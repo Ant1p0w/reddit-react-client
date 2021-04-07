@@ -1,3 +1,9 @@
-.sort-block{
+@media all and (min-width: 1024px) {
+    .sortBlock{
+        margin-left: auto;
+    }
+}
+
+.sortBlock{
 
 }
