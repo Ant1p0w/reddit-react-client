@@ -10,15 +10,6 @@
     flex: 1 1 100%;
 }
 
-.cardLink{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top:0;
-    left: 0;
-    z-index: 0;
-}
-
 @media all and (min-width: 1024px){
     .card{
         padding: 0 40px;

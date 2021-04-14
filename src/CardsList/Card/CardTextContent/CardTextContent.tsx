@@ -1,10 +1,11 @@
 import React from 'react';
-import styles from './textcontent.css';
+import styles from './cardtextcontent.css';
 import {UserLink} from "./UserLink";
 
-export function TextContent() {
+export function CardTextContent() {
     return (
         <div className={styles.textContent}>
+            <a className={styles.cardLink} href="#card-1"/>
             <div className={styles.metaData}>
                 <UserLink/>
                 <span className={styles.createdAt}>
