@@ -27,6 +27,10 @@
     color: var(--grey99);
 }
 
+.publishedLabel:after{
+    content: ' ';
+}
+
 .postLink {
     overflow: hidden;
     -webkit-line-clamp: 2;
