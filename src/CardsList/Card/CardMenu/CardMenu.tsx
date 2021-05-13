@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './cardmenu.css';
 import {Dropdown} from "../../../Dropdown";
+import {MenuIcon} from "../../../Icons";
+import {MenuItemsList} from "./MenuItemsList";
 
 const MENU_ITEMS = [
     {
@@ -25,56 +27,15 @@ const MENU_ITEMS = [
     }
 ]
 
-interface IMenuItem {
-    icon: string,
-    label: string
-}
-
-interface iMenuItemsListProps {
-    items: IMenuItem[];
-}
-
-function MenuButton() {
-    return (
-        <button className={styles.menuButton}>
-            <svg width="5" height="20" viewBox="0 0 5 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="2.5" cy="2.5" r="2.5" fill="#D9D9D9"/>
-                <circle cx="2.5" cy="10" r="2.5" fill="#D9D9D9"/>
-                <circle cx="2.5" cy="17.5" r="2.5" fill="#D9D9D9"/>
-            </svg>
-        </button>
-    )
-}
-
-function MenuItem(props: IMenuItem) {
-    return <li className={styles.menuItem}>
-        <div className={styles.menuItemIcon}>
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d={props.icon} fill="#999999"/>
-            </svg>
-        </div>
-        <span>{props.label}</span>
-    </li>;
-}
-
-function MenuItemsList(props: iMenuItemsListProps) {
-    const items = props.items;
-    const menuItems = items.map((item) =>
-        <MenuItem key={item.label} icon={item.icon} label={item.label}/>
-    );
-    return (
-        <ul>
-            {menuItems}
-            <li className={styles.menuItemClose}>Закрыть</li>
-        </ul>
-    );
-}
-
 export function CardMenu() {
     return (
         <div className={styles.menu}>
-            <Dropdown button={<MenuButton/>}>
-                <MenuItemsList items={MENU_ITEMS}/>
+            <Dropdown button={
+                <button className={styles.menuButton}>
+                    <MenuIcon/>
+                </button>
+            }>
+                <MenuItemsList items={MENU_ITEMS} postId={'1234'}/>
             </Dropdown>
         </div>
     );
