@@ -1,25 +1,31 @@
 .s10 {
     font-size: 10px;
+    line-height: 12px;
 }
 
 .s12 {
     font-size: 12px;
+    line-height: 14px;
 }
 
 .s14 {
     font-size: 14px;
+    line-height: 16px;
 }
 
 .s16 {
     font-size: 16px;
+    line-height: 18px;
 }
 
 .s20 {
     font-size: 20px;
+    line-height: 22px;
 }
 
 .s28 {
     font-size: 28px;
+    line-height: 30px;
 }
 
 .black {
@@ -65,77 +71,95 @@
 @media all and (min-width: 320px) and (max-width: 1023px) {
     .m10 {
         font-size: 10px;
+        line-height: 12px;
     }
 
     .m12 {
         font-size: 12px;
+        line-height: 14px;
     }
 
     .m14 {
         font-size: 14px;
+        line-height: 16px;
     }
 
     .m16 {
         font-size: 16px;
+        line-height: 18px;
     }
 
     .m20 {
         font-size: 20px;
+        line-height: 22px;
     }
 
     .m28 {
         font-size: 28px;
+        line-height: 30px;
     }
 }
 
 @media all and (min-width: 1024px) and (max-width: 1539px) {
     .t10 {
         font-size: 10px;
+        line-height: 12px;
     }
 
     .t12 {
         font-size: 12px;
+        line-height: 14px;
     }
 
     .t14 {
         font-size: 14px;
+        line-height: 16px;
     }
 
     .t16 {
         font-size: 16px;
+        line-height: 18px;
     }
 
     .t20 {
         font-size: 20px;
+        line-height: 22px;
     }
 
     .t28 {
         font-size: 28px;
+        line-height: 30px;
     }
 }
 
 @media all and (min-width: 1540px) {
     .d10 {
         font-size: 10px;
+        line-height: 12px;
     }
 
     .d12 {
         font-size: 12px;
+        line-height: 14px;
     }
 
     .d14 {
         font-size: 14px;
+        line-height: 16px;
     }
 
     .d16 {
         font-size: 16px;
+        line-height: 18px;
     }
 
     .d20 {
         font-size: 20px;
+        line-height: 22px;
     }
 
     .d28 {
         font-size: 28px;
+        line-height: 30px;
     }
 }

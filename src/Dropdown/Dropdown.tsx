@@ -22,13 +22,17 @@ export function Dropdown({button, children, isOpen, onOpen = NOOP, onClose = NOO
         }
     }
 
+    const handleClose = () => {
+        setIsDropdownOpen(false);
+    }
+
     return (
         <div className={styles.container}>
             <div onClick={handleOpen}>
                 {button}
             </div>
             {isDropdownOpen && (
-                <div className={styles.listContainer}>
+                <div onClick={handleClose} className={styles.listContainer}>
                     {children}
                 </div>
             )}
