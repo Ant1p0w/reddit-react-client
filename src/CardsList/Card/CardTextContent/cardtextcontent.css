@@ -42,6 +42,7 @@
 @media all and (min-width: 1024px) {
     .textContent {
         order: 2;
+        flex-basis: 50%;
     }
 }
 

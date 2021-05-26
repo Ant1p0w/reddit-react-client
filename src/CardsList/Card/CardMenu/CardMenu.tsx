@@ -1,16 +1,50 @@
 import React from 'react';
 import styles from './cardmenu.css';
+import {Dropdown} from "../../../Dropdown";
+import {MenuIcon} from "../../../Icons";
+import {MenuItemsList} from "./MenuItemsList";
+import {IMenuItem} from "./MenuItem";
+
+
+
+const MENU_ITEMS: IMenuItem[] = [
+    {
+        label: 'Комментарии',
+        mobile: false,
+        icon: 'CommentIcon',
+    },
+    {
+        label: 'Поделиться',
+        mobile: false,
+        icon: 'ShareIcon',
+    },
+    {
+        label: 'Скрыть',
+        mobile: true,
+        icon: 'HideIcon',
+    },
+    {
+        label: 'Сохранить',
+        mobile: false,
+        icon: 'SaveIcon'
+    },
+    {
+        label: 'Пожаловаться',
+        mobile: true,
+        icon: 'ReportIcon'
+    }
+]
 
 export function CardMenu() {
-  return (
-      <div className={styles.menu}>
-        <button className={styles.menuButton}>
-          <svg width="5" height="20" viewBox="0 0 5 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="2.5" cy="2.5" r="2.5" fill="#D9D9D9"/>
-            <circle cx="2.5" cy="10" r="2.5" fill="#D9D9D9"/>
-            <circle cx="2.5" cy="17.5" r="2.5" fill="#D9D9D9"/>
-          </svg>
-        </button>
-      </div>
-  );
+    return (
+        <div className={styles.menu}>
+            <Dropdown button={
+                <button className={styles.menuButton}>
+                    <MenuIcon/>
+                </button>
+            }>
+                <MenuItemsList items={MENU_ITEMS} postId={'1234'}/>
+            </Dropdown>
+        </div>
+    );
 }
