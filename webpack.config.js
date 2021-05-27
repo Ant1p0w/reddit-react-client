@@ -1,10 +1,17 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const {DefinePlugin} = require('webpack');
 
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEV = NODE_ENV === 'development';
 const IS_PROD = NODE_ENV === 'production';
+const DEV_PLUGINS = [
+    new CleanWebpackPlugin(),
+    new HTMLWebpackPlugin({template: path.resolve(__dirname, 'index.html')})
+];
+const COMMON_PLUGINS = [
+    new DefinePlugin({'process.env.CLIENT_ID': `'${process.env.CLIENT_ID}'`})];
 
 function setupDevtool() {
     if (IS_DEV) {
@@ -48,15 +55,7 @@ module.exports = {
             }
         ]
     },
-    plugins: IS_DEV
-        ? [
-            new CleanWebpackPlugin(),
-            new HTMLWebpackPlugin(
-                {template: path.resolve(__dirname, 'index.html')})
-        ] : [
-            new HTMLWebpackPlugin(
-                {template: path.resolve(__dirname, 'index.html')})
-        ],
+    plugins: IS_DEV ? DEV_PLUGINS.concat(COMMON_PLUGINS) : COMMON_PLUGINS,
     devServer: {
         port: 3000,
         open: true,

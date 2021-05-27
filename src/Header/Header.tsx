@@ -8,8 +8,8 @@ export function Header() {
   return (
       <header className={styles.header}>
           <ThreadTitle/>
-          <SearchBlock/>
           <SortBlock/>
+          <SearchBlock/>
       </header>
   );
 }
