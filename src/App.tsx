@@ -5,12 +5,14 @@ import {Layout} from "./Layout";
 import {Header} from "./Header";
 import {Content} from "./Content";
 import {CardsList} from "./CardsList";
-import {Dropdown} from "./Dropdown";
+import {useToken} from "./hooks/useToken";
 
 function AppComponent() {
+    const [token] = useToken();
+
     return (
         <Layout>
-            <Header/>
+            <Header token={token}/>
             <Content>
                 <CardsList/>
             </Content>
