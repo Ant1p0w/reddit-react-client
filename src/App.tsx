@@ -6,17 +6,21 @@ import {Header} from "./Header";
 import {Content} from "./Content";
 import {CardsList} from "./CardsList";
 import {useToken} from "./hooks/useToken";
+import {tokenContext} from "./context/tokenContext";
 
 function AppComponent() {
     const [token] = useToken();
+    const {Provider} = tokenContext;
 
     return (
-        <Layout>
-            <Header token={token}/>
-            <Content>
-                <CardsList/>
-            </Content>
-        </Layout>
+        <Provider value={token}>
+            <Layout>
+                <Header/>
+                <Content>
+                    <CardsList/>
+                </Content>
+            </Layout>
+        </Provider>
     )
 }
 
