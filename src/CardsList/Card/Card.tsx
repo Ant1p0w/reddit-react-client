@@ -11,7 +11,7 @@ interface IUserData{
     url: string
 }
 
-interface IPostData {
+export interface IPostData {
     postDate: string,
     postUrl: string,
     postPreviewUrl: string,

@@ -8,6 +8,7 @@ import {CardsList} from "./CardsList";
 import {useToken} from "./hooks/useToken";
 import {tokenContext} from "./context/tokenContext";
 import {userContext, UserContextProvider} from "./context/userContext";
+import {postsContext, PostContextProvider} from "./context/postsContext";
 
 
 function AppComponent() {
@@ -15,14 +16,16 @@ function AppComponent() {
 
     return (
         <tokenContext.Provider value={token}>
-          <UserContextProvider>
-              <Layout>
-                  <Header/>
-                  <Content>
-                      <CardsList/>
-                  </Content>
-              </Layout>
-          </UserContextProvider>
+            <UserContextProvider>
+                <PostContextProvider>
+                    <Layout>
+                        <Header/>
+                        <Content>
+                            <CardsList/>
+                        </Content>
+                    </Layout>
+                </PostContextProvider>
+            </UserContextProvider>
         </tokenContext.Provider>
     )
 }
