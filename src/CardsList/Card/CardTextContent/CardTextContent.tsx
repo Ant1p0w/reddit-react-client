@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './cardtextcontent.css';
 import {UserLink} from "./UserLink";
+import {Title} from "./Title";
 
 interface IUserInterface {
     name: string,
@@ -23,7 +24,6 @@ export class CardTextContent extends React.Component<ICardTextContentProps> {
     render() {
         return (
             <div className={styles.textContent}>
-                <a className={styles.cardLink} href={this.props.postUrl}/>
                 <div className={styles.metaData}>
                     <UserLink name={this.props.user.name} avatar={this.props.user.avatar} url={this.props.user.url}/>
                     <span className={styles.createdAt}>
@@ -31,11 +31,7 @@ export class CardTextContent extends React.Component<ICardTextContentProps> {
                         {this.props.postDate}
                     </span>
                 </div>
-                <h2>
-                    <a href={this.props.postUrl} className={styles.postLink}>
-                        {this.props.postDescription}
-                    </a>
-                </h2>
+                <Title postUrl={this.props.postUrl} postDescription={this.props.postDescription}/>
             </div>
         );
     }

@@ -1,0 +1,15 @@
+.modal{
+    position: fixed;
+    padding: 80px;
+    width: 50vw;
+    z-index: 999999999;
+    left: calc(50% - 25vw);
+    top: 10%;
+    background: #FFFFFF;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.15);
+    border-radius: 7px;
+}
+
+.content{
+   margin: 20px 0;
+}
