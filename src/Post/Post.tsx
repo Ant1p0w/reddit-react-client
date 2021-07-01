@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import styles from './post.css';
+import {CommentForm} from "../CommentForm";
 
 interface IPost {
     onClose?: () => void
@@ -38,6 +39,7 @@ export function Post(props: IPost) {
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur esse et harum laboriosam magnam
                     nam quibusdam. Blanditiis debitis delectus ipsa.</p>
             </div>
+            <CommentForm/>
         </div>
     ), node);
 }
