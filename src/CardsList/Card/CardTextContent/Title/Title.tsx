@@ -20,7 +20,9 @@ export function Title(props: ITitleProps) {
             </a>
 
             {isModalOpened && (
-                <Post/>
+                <Post onClose={() => {
+                    setIsModalOpened(false)
+                }}/>
             )};
         </h2>
     );
