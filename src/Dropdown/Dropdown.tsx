@@ -1,9 +1,11 @@
 import React, {ReactNode} from 'react';
 import styles from './dropdown.css';
+import ReactDOM from "react-dom";
 
 interface IDropdownProps {
     button: React.ReactNode;
     children: React.ReactNode;
+    portalNode?: HTMLDivElement;
     isOpen?: boolean;
     onOpen?: () => void;
     onClose?: () => void;
@@ -26,7 +28,11 @@ export function Dropdown({button, children, isOpen, onOpen = NOOP, onClose = NOO
         setIsDropdownOpen(false);
     }
 
-    return (
+    const node = document.getElementById('react-dropdown');
+
+    if(!node) return null;
+
+    return ReactDOM.createPortal((
         <div className={styles.container}>
             <div onClick={handleOpen}>
                 {button}
@@ -37,5 +43,5 @@ export function Dropdown({button, children, isOpen, onOpen = NOOP, onClose = NOO
                 </div>
             )}
         </div>
-    );
+    ), node);
 }

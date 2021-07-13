@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import styles from './post.css';
-import {CommentForm} from "../CommentForm";
+import {CommentsList} from "../CommentsList";
 
 interface IPost {
     onClose?: () => void
@@ -12,6 +12,8 @@ export function Post(props: IPost) {
 
     useEffect(() => {
 
+        document.body.classList.add('modal-opened');
+
         function handleClick(event: MouseEvent) {
             if (event.target instanceof Node && !ref.current?.contains(event.target)) {
                 props.onClose?.();
@@ -21,6 +23,7 @@ export function Post(props: IPost) {
         document.addEventListener('click', handleClick);
 
         return () => {
+            document.body.classList.remove('modal-opened');
             document.removeEventListener('click', handleClick);
         }
     }, []);
@@ -29,17 +32,19 @@ export function Post(props: IPost) {
     if (!node) return null;
 
     return ReactDOM.createPortal((
-        <div className={styles.modal} ref={ref}>
-            <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, molestias?</h2>
-            <div className={styles.content}>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur esse et harum laboriosam magnam
-                    nam quibusdam. Blanditiis debitis delectus ipsa.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur esse et harum laboriosam magnam
-                    nam quibusdam. Blanditiis debitis delectus ipsa.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur esse et harum laboriosam magnam
-                    nam quibusdam. Blanditiis debitis delectus ipsa.</p>
+        <div className={styles.modalWrap}>
+            <div className={styles.modal} ref={ref}>
+                <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, molestias?</h2>
+                <div className={styles.content}>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur esse et harum laboriosam magnam
+                        nam quibusdam. Blanditiis debitis delectus ipsa.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur esse et harum laboriosam magnam
+                        nam quibusdam. Blanditiis debitis delectus ipsa.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur esse et harum laboriosam magnam
+                        nam quibusdam. Blanditiis debitis delectus ipsa.</p>
+                </div>
+                <CommentsList/>
             </div>
-            <CommentForm/>
         </div>
     ), node);
 }
