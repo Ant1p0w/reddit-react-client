@@ -32,16 +32,16 @@ export function Dropdown({button, children, isOpen, onOpen = NOOP, onClose = NOO
 
     if(!node) return null;
 
-    return ReactDOM.createPortal((
+    return (
         <div className={styles.container}>
             <div onClick={handleOpen}>
                 {button}
             </div>
-            {isDropdownOpen && (
+            {isDropdownOpen && ReactDOM.createPortal((
                 <div onClick={handleClose} className={styles.listContainer}>
                     {children}
                 </div>
-            )}
+            ), node)}
         </div>
-    ), node);
+    );
 }

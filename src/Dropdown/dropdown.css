@@ -4,7 +4,10 @@
 }
 
 .listContainer{
-    position: relative;
+    position: fixed;
+    top: 15%;
+    right: 15%;
+    z-index: 99999;
 }
 
 .list {
