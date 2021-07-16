@@ -7,12 +7,17 @@ import {Content} from "./Content";
 import {CardsList} from "./CardsList";
 import {useToken} from "./hooks/useToken";
 import {tokenContext} from "./context/tokenContext";
-import {userContext, UserContextProvider} from "./context/userContext";
-import {postsContext, PostContextProvider} from "./context/postsContext";
+import {UserContextProvider} from "./context/userContext";
+import {PostContextProvider} from "./context/postsContext";
 import {commentContext} from "./context/commentContext";
+import {Provider} from "react-redux";
+import {createStore} from "redux";
+import {composeWithDevTools} from "redux-devtools-extension";
 
+const store = createStore(()=>{}, composeWithDevTools());
 
 function AppComponent() {
+
     const [token] = useToken();
     const [commentValue, setCommentValue] = useState('');
 
