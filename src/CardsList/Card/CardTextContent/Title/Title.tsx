@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styles from './title.css';
 import {Post} from "../../../../Post";
+import {preventDefault} from "../../../../utils/react/preventDefault";
 
 interface ITitleProps {
     postUrl: string,
@@ -13,9 +14,9 @@ export function Title(props: ITitleProps) {
 
     return (
         <h2>
-            <a href="#post" className={styles.postLink} onClick={() => {
+            <a href="#post" className={styles.postLink} onClick={preventDefault(() => {
                 setIsModalOpened(true)
-            }}>
+            })}>
                 {postDescription}
             </a>
 
