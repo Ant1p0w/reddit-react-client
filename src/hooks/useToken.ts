@@ -1,7 +1,10 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState, setToken} from "../store";
 
 export function useToken() {
-    const [token, setToken] = useState('');
+    const token = useSelector<RootState, string>(state => state.token);
+    const dispatch = useDispatch();
 
     const listenToHash = () => {
         let urlHash = window.location.hash.substring(1);
@@ -9,7 +12,6 @@ export function useToken() {
         let token = '';
 
         for (let queryVar of queryVars) {
-            console.log(queryVar);
             let pair = queryVar.split('=');
 
             if (pair[0] === 'access_token') {
@@ -17,7 +19,7 @@ export function useToken() {
             }
         }
 
-        setToken(token);
+        dispatch(setToken(token));
     };
 
     useEffect(() => {

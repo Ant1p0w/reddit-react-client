@@ -5,23 +5,19 @@ import {Layout} from "./Layout";
 import {Header} from "./Header";
 import {Content} from "./Content";
 import {CardsList} from "./CardsList";
-import {useToken} from "./hooks/useToken";
-import {tokenContext} from "./context/tokenContext";
 import {UserContextProvider} from "./context/userContext";
 import {PostContextProvider} from "./context/postsContext";
 import {Provider} from "react-redux";
 import {createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {rootReducer} from "./store";
+import {useToken} from "./hooks/useToken";
 
 const store = createStore(rootReducer, composeWithDevTools());
 
 function AppComponent() {
-    const [token] = useToken();
-
     return (
         <Provider store={store}>
-            <tokenContext.Provider value={token}>
                 <UserContextProvider>
                     <PostContextProvider>
                         <Layout>
@@ -32,7 +28,6 @@ function AppComponent() {
                         </Layout>
                     </PostContextProvider>
                 </UserContextProvider>
-            </tokenContext.Provider>
         </Provider>
     )
 }
