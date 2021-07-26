@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styles from './commentslist.css';
 import {CommentItem} from "./CommentItem";
 import {CommentForm} from "../CommentForm";
+import {CommentFormContainer} from "../CommentFormContainer";
 
 export function CommentsList() {
     const [isCommentForm, setIsCommentForm] = useState(false);
@@ -15,7 +16,7 @@ export function CommentsList() {
     return (
         <>
             {isCommentForm && (
-                <CommentForm userName={replyToUser}/>
+                <CommentFormContainer userName={replyToUser}/>
             )}
             <div className={styles.commentsList}>
                 <CommentItem handleReply={onReply} comment={{
