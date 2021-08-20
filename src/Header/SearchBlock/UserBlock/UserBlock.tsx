@@ -6,9 +6,10 @@ import {AnonIcon} from "../../../Icons";
 interface IUserBLockProps {
     avatarSrc?: string
     username?: string
+    loading?: boolean
 }
 
-export function UserBlock({avatarSrc, username}: IUserBLockProps) {
+export function UserBlock({avatarSrc, username, loading}: IUserBLockProps) {
     return (
         <a className={styles.userBox}
            href={"https://www.reddit.com/api/v1/authorize?client_id=" + process.env.CLIENT_ID + "&response_type=token&state=RANDOM_STRING&redirect_uri=http://localhost:3000/&scope=read submit identity"}>
@@ -19,7 +20,15 @@ export function UserBlock({avatarSrc, username}: IUserBLockProps) {
                 }
             </div>
             <div className={styles.username}>
-                <Text size={20} color={username ? EColor.black : EColor.gray99}>{username || 'Anon'}</Text>
+                {
+                    loading ?
+                        (
+                            <Text size={20} color={username ? EColor.black : EColor.gray99}>Загрузка...</Text>
+                        ) : (
+                            <Text size={20} color={username ? EColor.black : EColor.gray99}>{username || 'Anon'}</Text>
+                        )
+                }
+
             </div>
         </a>
     );

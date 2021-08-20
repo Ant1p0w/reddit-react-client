@@ -1,6 +1,6 @@
 import {useEffect, useState, useContext} from 'react';
 import {useSelector} from "react-redux";
-import {RootState} from "../store";
+import {RootState} from "../store/reducer";
 import axios from 'axios';
 
 interface IResponseDataItem{

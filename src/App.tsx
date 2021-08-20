@@ -1,33 +1,34 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './main.global.css';
 import {hot} from 'react-hot-loader/root';
 import {Layout} from "./Layout";
 import {Header} from "./Header";
 import {Content} from "./Content";
 import {CardsList} from "./CardsList";
-import {UserContextProvider} from "./context/userContext";
 import {PostContextProvider} from "./context/postsContext";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
+import {applyMiddleware, createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
-import {rootReducer} from "./store";
-import {useToken} from "./hooks/useToken";
+import {rootReducer} from "./store/reducer";
+import thunk from 'redux-thunk';
 
-const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function AppComponent() {
+    useEffect(() => {
+
+    }, []);
+
     return (
         <Provider store={store}>
-                <UserContextProvider>
-                    <PostContextProvider>
-                        <Layout>
-                            <Header/>
-                            <Content>
-                                <CardsList/>
-                            </Content>
-                        </Layout>
-                    </PostContextProvider>
-                </UserContextProvider>
+            <PostContextProvider>
+                <Layout>
+                    <Header/>
+                    <Content>
+                        <CardsList/>
+                    </Content>
+                </Layout>
+            </PostContextProvider>
         </Provider>
     )
 }
