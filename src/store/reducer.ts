@@ -9,18 +9,23 @@ import {
     MeRequestSuccessAction
 } from "./me/actions";
 import {meReducer, MeState} from "./me/reducer";
+import {TOKEN_REQUEST, TOKEN_REQUEST_ERROR, TOKEN_REQUEST_SUCCESS} from "./token/actions";
+import {tokenReducer, TokenState} from "./token/reducer";
 const UPDATE_COMMENT = 'UPDATE_COMMENT';
-const SET_TOKEN = 'SET_TOKEN';
 
 export type RootState = {
     commentText: string;
-    token: string;
+    token: TokenState;
     me: MeState;
 }
 
 const initialState: RootState = {
     commentText: 'Привет, Skillbox!',
-    token: '',
+    token: {
+        loading: false,
+        error: '',
+        token: '',
+    },
     me: {
         loading: false,
         error: '',
@@ -28,14 +33,8 @@ const initialState: RootState = {
     }
 }
 
-
 export const updateComment: ActionCreator<AnyAction> = (text) => ({
     type: UPDATE_COMMENT,
-    text
-});
-
-export const setToken: ActionCreator<AnyAction> = (text) => ({
-    type: SET_TOKEN,
     text
 });
 
@@ -48,11 +47,13 @@ export const rootReducer: Reducer<RootState> = (state = initialState, action) =>
                 ...state,
                 commentText: action.text,
             };
-        case SET_TOKEN:
+        case TOKEN_REQUEST:
+        case TOKEN_REQUEST_SUCCESS:
+        case TOKEN_REQUEST_ERROR:
             return {
                 ...state,
-                token: action.text,
-            };
+                token: tokenReducer(state.token, action),
+            }
         case ME_REQUEST:
         case ME_REQUEST_SUCCESS:
         case ME_REQUEST_ERROR:

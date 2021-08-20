@@ -9,7 +9,7 @@ interface IResponseDataItem{
 }
 
 export function usePostsData(){
-    const token = useSelector<RootState, string>(state => state.token);
+    const token = useSelector<RootState, string>(state => state.token.token);
 
     const [data, setData] = useState([]);
 

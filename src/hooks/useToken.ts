@@ -1,30 +1,18 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState, setToken} from "../store/reducer";
+import {RootState} from "../store/reducer";
+import {tokenRequestAsync} from "../store/token/actions";
 
 export function useToken() {
-    const token = useSelector<RootState, string>(state => state.token);
+    const token = useSelector<RootState, string>(state => state.token.token);
+    const loading = useSelector<RootState, boolean>(state => state.token.loading);
     const dispatch = useDispatch();
 
-    const listenToHash = () => {
-        let urlHash = window.location.hash.substring(1);
-        let queryVars = urlHash.split('&');
-        let token = '';
-
-        for (let queryVar of queryVars) {
-            let pair = queryVar.split('=');
-
-            if (pair[0] === 'access_token') {
-                token = pair[1];
-            }
-        }
-
-        dispatch(setToken(token));
-    };
-
     useEffect(() => {
-        listenToHash();
-    }, []);
+        if(!token){
+            dispatch(tokenRequestAsync());
+        }
+    }, [token]);
 
-    return [token]
+    return {token, loading};
 }
