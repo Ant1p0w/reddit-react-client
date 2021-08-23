@@ -30,6 +30,11 @@ export function CommentFormContainer({userName}: ICommentFormContainerProps) {
     }
 
     return (
-        <CommentForm value={value} onChange={handleChange} onSubmit={handleSubmit} innerRef={ref}/>
+        <CommentForm
+            // value={value}
+            // onChange={handleChange}
+            // onSubmit={handleSubmit}
+            // innerRef={ref}
+        />
     )
 }

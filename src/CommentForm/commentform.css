@@ -9,6 +9,10 @@
     resize: none;
 }
 
+.input[aria-invalid]{
+    border: 1px solid red;
+}
+
 .button{
     border: none;
     padding: 17px 50px;
@@ -16,4 +20,9 @@
     border-radius: 0 0 3px 0;
     color: #fff;
     font-size: 14px;
+}
+
+.button:disabled{
+    opacity: 0.5;
+    cursor: default;
 }
