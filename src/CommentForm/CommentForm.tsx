@@ -1,51 +1,21 @@
-import React, {ChangeEvent, FormEvent, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useRef} from 'react';
 import styles from './commentform.css';
+import {Form, Field, FormikTouched, FormikErrors} from "formik";
 
 interface ICommentFormProps {
     value: string,
-    onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void,
-    onSubmit: (event: FormEvent) => void,
+    onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void,
     innerRef: React.Ref<HTMLTextAreaElement>
+    touched: FormikTouched<any>
+    errors: FormikErrors<any>
 }
 
-export function CommentForm() {
-    const [value, setValue] = useState('');
-    const [touched, setTouched] = useState(false);
-    const [valueError, setValueError] = useState('');
-
-    function handleSubmit(event: FormEvent) {
-        event.preventDefault();
-        setTouched(true);
-        setValueError(validateValue());
-
-        const isFormValidate = !validateValue();
-        if(!isFormValidate) return;
-
-        alert('form send');
-    }
-
-    function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-        setValue(event.target.value);
-    }
-
-    function validateValue() {
-        if (value.length <= 3) return 'Введите больше 3-х символов.'
-        return '';
-    }
-
-    const isFormValid = !validateValue();
-
+export function CommentForm({value, onChange, innerRef, touched, errors}: ICommentFormProps) {
     return (
-        <form className={styles.form} onSubmit={handleSubmit}>
-            <textarea
-                rows={4}
-                className={styles.input}
-                value={value}
-                onChange={handleChange}
-                aria-invalid={valueError ? 'true' : undefined}/>
-            {touched && (<div>{valueError}</div>)}
-
+        <Form className={styles.form}>
+            <Field component="textarea" name="comment" innerRef={innerRef} rows={4} className={styles.input} value={value} onChange={onChange}/>
+            {touched.comment && errors.comment && <div>{errors.comment}</div>}
             <button type="submit" className={styles.button}>Комментировать</button>
-        </form>
+        </Form>
     );
 }

@@ -1,10 +1,15 @@
-import React, {ChangeEvent, FormEvent, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState, updateComment} from "../store/reducer";
 import {CommentForm} from "../CommentForm";
+import {Formik, FormikErrors, FormikHelpers, useFormik} from 'formik';
 
 interface ICommentFormContainerProps {
     userName?: string
+}
+
+interface ICommentFormValues {
+    comment: string
 }
 
 export function CommentFormContainer({userName}: ICommentFormContainerProps) {
@@ -20,21 +25,44 @@ export function CommentFormContainer({userName}: ICommentFormContainerProps) {
         }
     }, [userName]);
 
-    function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-        dispatch(updateComment(event.target.value));
+    function handleChange(setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void){
+        return function (event: React.ChangeEvent<HTMLTextAreaElement>) {
+            dispatch(updateComment(event.target.value));
+            setFieldValue('comment', event.target.value);
+        }
     }
 
-    function handleSubmit(event: FormEvent) {
-        event.preventDefault();
-        console.log(value);
+    function handleSubmit(values: ICommentFormValues, actions: FormikHelpers<ICommentFormValues>) {
+        alert(JSON.stringify(values, null, 2));
+        actions.setSubmitting(false);
     }
+
+    const initialValues: ICommentFormValues = {comment: value};
+
+    const validate = (values: ICommentFormValues) => {
+        let errors: FormikErrors<ICommentFormValues> = {};
+
+        if (values.comment.length <= 3) {
+            errors.comment = 'Поле должнобыть болье 3-х символов.';
+        }
+
+        return errors;
+    };
 
     return (
-        <CommentForm
-            // value={value}
-            // onChange={handleChange}
-            // onSubmit={handleSubmit}
-            // innerRef={ref}
+        <Formik
+            initialValues={initialValues}
+            validate={validate}
+            onSubmit={handleSubmit}
+            render={({values, errors, touched, setFieldValue}) => (
+                <CommentForm
+                    innerRef={ref}
+                    value={value}
+                    onChange={handleChange(setFieldValue)}
+                    errors={errors}
+                    touched={touched}
+                />
+            )}
         />
     )
 }
