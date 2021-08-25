@@ -12,6 +12,7 @@ interface IUserData{
 }
 
 export interface IPostData {
+    id: number,
     postDate: string,
     postUrl: string,
     postPreviewUrl: string,
