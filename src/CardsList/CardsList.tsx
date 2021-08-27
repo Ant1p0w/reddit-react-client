@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './cardslist.css';
 import {Card, IPostData} from "./Card";
 import axios from "axios";
@@ -19,8 +19,10 @@ interface IPostsItemData {
 export function CardsList() {
     const token = useSelector<RootState>(state => state.token.token);
     const [posts, setPosts] = useState<IPostsItemData[]>([]);
+    const [nextAfter, setNextAfter] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorLoading, setErrorLoading] = useState('');
+    const bottomOfList = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!token) return;
@@ -30,12 +32,18 @@ export function CardsList() {
                 setLoading(true);
                 setErrorLoading('');
 
-                const {data: {data: {children}}} = await axios.get('https://oauth.reddit.com/rising/', {
+                const {data: {data: {after, children}}} = await axios.get('https://oauth.reddit.com/rising/', {
                     headers: {
                         Authorization: `bearer ${token}`,
+                    },
+                    params: {
+                        limit: 10,
+                        after: nextAfter
                     }
                 });
-                setPosts(children);
+
+                setPosts(prevState => prevState.concat(...children));
+                setNextAfter(after);
             } catch (error) {
                 setErrorLoading(String(error));
             }
@@ -43,9 +51,24 @@ export function CardsList() {
             setLoading(false);
         }
 
-        load();
 
-    }, [token]);
+        const observer = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting){
+                load();
+            }
+        }, {rootMargin: '10px'});
+
+        if (bottomOfList.current) {
+            observer.observe(bottomOfList.current);
+        }
+
+        return () => {
+            if (bottomOfList.current) {
+                observer.unobserve(bottomOfList.current);
+            }
+        }
+    }, [bottomOfList.current, nextAfter, token]);
+
 
     const cardsListData = posts.map((postItemData: IPostsItemData) => {
         return {
@@ -64,14 +87,18 @@ export function CardsList() {
 
     return (
         <>
-            {cardsListData.length === 0 && !loading && !errorLoading && (<div>нет постов...</div>)}
-            {loading && (<div>загрузка...</div>)}
-            {errorLoading && (<div>{errorLoading}</div>)}
+
             <ul className={styles.cardsList}>
                 {cardsListData.map((post: IPostData) => (
                     <Card postData={post} key={post.id}/>
                 ))}
             </ul>
+
+            <div ref={bottomOfList}/>
+
+            {cardsListData.length === 0 && !loading && !errorLoading && (<div>нет постов...</div>)}
+            {loading && (<div>загрузка...</div>)}
+            {errorLoading && (<div>{errorLoading}</div>)}
         </>
 
     );
