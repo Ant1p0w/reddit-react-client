@@ -32,20 +32,20 @@ export const tokenRequestAsync = (): ThunkAction<void, RootState, unknown, Actio
     dispatch(tokenRequest());
 
     let parseToken = new Promise((resolve, reject) => {
+        let token = sessionStorage.getItem('token') ?? '';
         let urlHash = window.location.hash.substring(1);
         let queryVars = urlHash.split('&');
-        let token = '';
 
         for (let queryVar of queryVars) {
             let pair = queryVar.split('=');
 
             if (pair[0] === 'access_token') {
                 token = pair[1];
-                resolve(token);
+                sessionStorage.setItem('token', token);
             }
         }
 
-        reject('no token');
+        !!token ? resolve(token) : reject('no token');
     });
 
     parseToken

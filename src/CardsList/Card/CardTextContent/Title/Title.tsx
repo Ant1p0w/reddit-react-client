@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './title.css';
-import {Post} from "../../../../Post";
 import {preventDefault} from "../../../../utils/react/preventDefault";
+import {Link} from 'react-router-dom';
 
 interface ITitleProps {
     postUrl: string,
@@ -10,21 +10,12 @@ interface ITitleProps {
 
 export function Title(props: ITitleProps) {
     const {postUrl, postDescription} = props;
-    const [isModalOpened, setIsModalOpened] = useState(false);
 
     return (
         <h2>
-            <a href="#post" className={styles.postLink} onClick={preventDefault(() => {
-                setIsModalOpened(true)
-            })}>
+            <Link to={'/posts/' + postUrl} className={styles.postLink}>
                 {postDescription}
-            </a>
-
-            {isModalOpened && (
-                <Post onClose={() => {
-                    setIsModalOpened(false)
-                }}/>
-            )};
+            </Link>
         </h2>
     );
 }

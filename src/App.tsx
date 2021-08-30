@@ -10,18 +10,42 @@ import {applyMiddleware, createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {rootReducer} from "./store/reducer";
 import thunk from 'redux-thunk';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {Post} from "./Post";
+import {Text} from "./Text";
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 function AppComponent() {
     return (
         <Provider store={store}>
-            <Layout>
-                <Header/>
-                <Content>
-                    <CardsList/>
-                </Content>
-            </Layout>
+            <BrowserRouter>
+                <Layout>
+                    <Header/>
+                    <Content>
+                        <Switch>
+                            <Route exact path="/">
+                                <div style={{textAlign:'center'}}>
+                                    <Text size={20}>Для отображения контента, пожалуйста, авторизуйтесь.</Text>
+                                </div>
+                            </Route>
+                            <Route path="/posts/:id">
+                                <CardsList/>
+                                <Post/>
+                            </Route>
+                            <Route path="/posts">
+                                <CardsList/>
+                            </Route>
+                            <Route path="*">
+                                <div style={{textAlign:'center'}}>
+                                    <Text size={20}>404 ошибка</Text>
+                                    <Text size={16}>страница не найдена</Text>
+                                </div>
+                            </Route>
+                        </Switch>
+                    </Content>
+                </Layout>
+            </BrowserRouter>
         </Provider>
     )
 }
