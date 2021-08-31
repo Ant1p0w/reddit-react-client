@@ -57,7 +57,7 @@ module.exports = {
     },
     plugins: IS_DEV ? DEV_PLUGINS.concat(COMMON_PLUGINS) : COMMON_PLUGINS,
     devServer: {
-        port: 3000,
+        port: process.env.PORT || 3000,
         open: true,
         historyApiFallback: true,
         hot: IS_DEV
