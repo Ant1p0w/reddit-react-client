@@ -8,7 +8,7 @@
     "build": "env NODE_ENV=production webpack --config webpack.config.js",
     "dev": "env NODE_ENV=development CLIENT_ID=Y6MsrNpfzbpo8A webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node CLIENT_ID=BbTm5Ilto8hvGfaQ_RiDgQ server.js"
+    "start": "env CLIENT_ID=BbTm5Ilto8hvGfaQ_RiDgQ node server.js"
   },
   "repository": {
     "type": "git",
@@ -29,10 +29,12 @@
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "clean-webpack-plugin": "^3.0.0",
+    "compression": "^1.7.4",
     "css-loader": "^5.2.0",
     "enzyme": "^3.11.0",
     "express": "^4.17.1",
     "formik": "^2.2.9",
+    "helmet": "^4.6.0",
     "html-webpack-plugin": "^5.3.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
