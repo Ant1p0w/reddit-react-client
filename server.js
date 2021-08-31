@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(compression);
+app.use(compression());
 app.use(helmet({
     contentSecurityPolicy: false
 }));

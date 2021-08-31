@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build:dev": "env NODE_ENV=development webpack --config webpack.config.js",
-    "build": "env NODE_ENV=production webpack --config webpack.config.js",
+    "build": "env NODE_ENV=production CLIENT_ID=BbTm5Ilto8hvGfaQ_RiDgQ webpack --config webpack.config.js",
     "dev": "env NODE_ENV=development CLIENT_ID=Y6MsrNpfzbpo8A webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "env CLIENT_ID=BbTm5Ilto8hvGfaQ_RiDgQ node server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
